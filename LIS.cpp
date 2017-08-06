@@ -57,7 +57,7 @@ int main(){
   for(int i = 0 ; i < n ; ++i)
     scanf("%d", A+i);
   printf("%d\n%d\n%d\n%d\n", LIS(), iterativeLIS(), rollingLIS(), greadyLIS());
-	return 0;
+  return 0;
 }
 
 /* input sample

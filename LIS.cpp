@@ -60,25 +60,21 @@ int greadyLIS(){    //Memory -> O(n), Time -> O(nLogn)
 }
 
 void greadyLISWithBuilding(){    //Memory -> O(n), Time -> O(nLogn)
-  int LIS = 0, ret[N+9] , last = OO;
+  int LIS = 0, ret[N+9] , last = -1;
   set<int> retset[N+9];
-  stack<int> st;
   for(int i=0; i<n; i++){
     auto it = lower_bound(ret, ret+LIS, A[i]);
     if(it == ret+LIS)   ret[LIS++] = A[i];
     else                ret[LIS-1] = A[i];
     retset[LIS].insert(A[i]);
   }
-  for(int i = LIS ; i>0 ; --i){
-    auto it = retset[i].lower_bound(last);
-    if(it!=retset[i].begin())   --it;
-    st.push((last = *it));
-  }
   /*Printing*/
   printf("Gready says LIS = %d\n", LIS);
   printf("And a valid sub-sequence is : ");
-  while(!st.empty())
-    printf("%d ", st.top()), st.pop();
+  for(int i = 1 ; i<=LIS ; ++i){
+    auto it = retset[i].upper_bound(last);
+    printf("%d ", (last = *it));
+  }
   puts("");
 }
 

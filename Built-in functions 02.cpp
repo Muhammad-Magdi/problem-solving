@@ -69,7 +69,7 @@ int main(){
 	/****************************binary_search******************************/
 	//given a sorted range	//O(Log)
 	
-	if(binary_search(A, A+n, 5))		//return 0 | 1		//O(log)
+	if(binary_search(A, A+n, 5))		//returns 0 | 1		//O(log)
 		puts("Found");
 	else
 		puts("Not Found");
@@ -78,7 +78,7 @@ int main(){
 	//given a sorted range	//O(Log)
 	
 	printf("Lower bound returned %d\n", *lower_bound(A, A+n, 3));		//an iterator on the first >=
-	printf("Upper bound returned %d\n", *lower_bound(A, A+n, 3));		//an iterator on the first >
+	printf("Upper bound returned %d\n", *upper_bound(A, A+n, 3));		//an iterator on the first >
 	auto itr = equal_range(A, A+n, 3);		//pair of iterators ~ lower&upper
 	printf("The equal range returned %d\n", itr.second-itr.first);
 	

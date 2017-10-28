@@ -56,6 +56,11 @@ What's bitwise operations?
   msk &= ~(1<<k);
 
 
+- How to get the most right ON bit of some mask?
+
+  leftON = (msk&(-msk));
+
+  
 - How to count the number of ON bits in some mask of n bits?
 
   int num = 0;

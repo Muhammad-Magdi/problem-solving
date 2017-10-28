@@ -58,7 +58,7 @@ What's bitwise operations?
 
 - How to get the most right ON bit of some mask?
 
-  leftON = (msk&(-msk));
+  rightON = (msk&(-msk));
 
   
 - How to count the number of ON bits in some mask of n bits?

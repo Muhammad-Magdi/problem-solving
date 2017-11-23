@@ -94,7 +94,7 @@ Problem #4 -> Given Q numbers for each of them find if it's prime or not?
   void sieve(){                             //O(N*Log(Log(N)))
     isComposite[0] = isComposite[1] = 1;
     for(int i = 2 ; i * i <= N ; ++i){      //The Maximum value
-      if(!isComposite[i]) for(int j = 2*i ; j <= N ; j+=i){
+      if(!isComposite[i]) for(int j = i*i ; j <= N ; j+=i){
         isComposite[j] = 1;
       }
     }

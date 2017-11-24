@@ -44,23 +44,23 @@
   O(n!)       ---->     factorial     ---->     11        ---->     finding all permutations
 
 
-int calcSum(int a, int b){
+int calcSum(int a, int b){		//O(1)
   int sum = a+b;
   return sum;
 }
 
-double calcAverage(int a, int b){
+double calcAverage(int a, int b){		//O(1)
   double avg = (a+b)/2.0;
   return avg;
 }
 
-bool isAlphabit(char x){
+bool isAlphabit(char x){		//O(1)
   return (x>='A' && x<='Z' || x>='a' && x<='z');
 }
 
 
 
-double sumHarmonicSeries(int n){
+double sumHarmonicSeries(int n){		//O(n)
   double sum = 0;
   for(int i = 1 ; i <= n ; ++i){
     sum += (1.0/i);
@@ -68,26 +68,26 @@ double sumHarmonicSeries(int n){
   return sum;
 }
 
-long long calcSumSegment(int a, int b){
+long long calcSumSegment(int a, int b){		//O(b)
   long long sum = 0;
   for(int i = a ; i<=b ; ++i)
     sum += i;
   return sum;
 }
 
-int fact(int n){
+int fact(int n){		//O(n)
   if(!n || n==1)	return 1;
   return n*fact(n-1);
 }
 
-int power1(int base, int power){
+int power1(int base, int power){		//O(power)
   if(!power)  return 1;
   return base*power1(base, power-1);
 }
 
 
 
-bool binarySearch(int val){
+bool binarySearch(int val, int n){			//O(log(n))
   int lo = 0, hi = n, mid;
   while(lo<hi){
     mid = ((lo+hi)>>1);
@@ -100,7 +100,7 @@ bool binarySearch(int val){
   return 0;
 }
 
-int calcLog(int n){
+int calcLog(int n){		//O(log(n))
 	int ret = 0;
 	while(n > 1){
 		++ret;
@@ -109,7 +109,7 @@ int calcLog(int n){
   return ret;
 }
 
-int power2(int base, int power){
+int power2(int base, int power){		//O(log(n))
   if(!power)  return 1;
   int sub = power2(base, power>>1);
   return (power&1? sub*sub*base : sub*sub);
@@ -117,7 +117,7 @@ int power2(int base, int power){
 
 
 
-for(int i = 0 ; i < (1<<n) ; ++i){
+for(int i = 0 ; i < (1<<n) ; ++i){		//O(2^n)
   //some O(1) operations
 }
 /*
@@ -133,20 +133,20 @@ for(int i = 0 ; i < (1<<n) ; ++i){
 1<<n = 2^n
 */
 
-int fib(int n){
+int fib(int n){		//O(2^n)
   if(!n || n==1)	return n;
   return fib(n-1)+fib(n-2);
 }
 
 
 
-for(int i = 0 ; i < (1<<n) ; ++i){
+for(int i = 0 ; i < (1<<n) ; ++i){		//O(n * (2^n))
   for(int i = 0 ; i < n ; ++i){
     //some constant order statements go here
   }
 }
 
-void searchArray(){
+void searchArray(){		//O(n*log(n))
   for(int i = 0 ; i < n ; ++i){
     if(binarySearch(B[i]))
       puts("Found");
@@ -156,9 +156,8 @@ void searchArray(){
 }
 
 bool isComp[1008];
-void sieve(){
-  isComp[0] = isComp[1] = 1;
-  for(int i = 2 ; i < n ; ++i){
+void something(){		//O(n*log(n))
+  for(int i = 0 ; i < n ; ++i){
     if(!isComp[i]){
       for(int j = i ; j < n ; j+=i)
         isComp[i] = 1;
@@ -168,8 +167,8 @@ void sieve(){
 
 
 
-void printPermutations(string s){
-  sort(s.begin(), s.end());
+void printPermutations(string s){		//O(n!)
+  sort(s.begin(), s.end());	
 	do {
 		cout << s << endl;
 	} while(next_permutation(s.begin(), s.end()));

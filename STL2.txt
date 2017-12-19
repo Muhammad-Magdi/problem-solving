@@ -1,0 +1,56 @@
+priority_queue<T> pq;
+Features:
+  - Max heap tree.
+  - Keeps the maximum value on top of the Tree.
+
+Commonly used Member functions:
+  - size()
+  - empty()
+  - push(val)              //O(log(n))
+  - pop()                  //Avoid RTE
+  - top()                  //Avoid RTE
+
+Iteration:
+  while(!pq.empty()){
+    printf("%d ", pq.top());
+    pq.pop();
+  }
+
+-What if we want to get the minimum values?
+  1- Multiply values by -1.
+  2- Use greater Comparator.
+
+
+set<T> st;
+
+Features:
+  - Red Black tree -Balanced Binary Search tree-.
+  - No Duplicates.
+  - Seems to be sorted Ascendingly.
+  - search, insert and erase in O(log(n))
+
+Commonly used Member functions:
+  - begin()
+  - end()
+  - rbegin()
+  - rend()
+  - insert(val)
+  - find(val)             //iterator
+  - count(val)            // 0|1
+  - erase(val)      ||    erase(iterator)
+  - lower_bound(val)      //iterator where >= val
+  - upper_bound(val)      //iterator where > val
+  - size()
+  - empty()
+  - clear()
+
+Iteration:
+  for(auto x : st){
+    printf("%d", x);
+  }
+
+  for(auto it = st.begin() ; it != st.end() ; ++it){
+    printf("%d", *it);
+  }
+
+multiset<T> ms;     //the same as set but allows Duplicates.

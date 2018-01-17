@@ -9,6 +9,7 @@ copy(begin1, end1, begin2)	     //iterator		                                 //O
 fill(begin, end, val)		                                                       //O(N)
 reverse(begin, end)			                                                       //~O(N)
 sort(begin, end, f)			         //Ascendignly                                 //O(NLog(N))
+nth_element(begin, nth_element_itr, end)                                       //O(N)
 
 unique(begin, end)			         //iterator	                                   //O(N)
 find(begin, end, val)            //iterator                                    //O(N)

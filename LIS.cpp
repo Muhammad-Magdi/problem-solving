@@ -9,6 +9,8 @@ const int N = 1000, M = 2e6, OO = 1000000007, EPS = 0.00000001;
 
 int n , A[N+9], mem[N+9][N+9];
 
+/********************* Memoization Solution *********************/
+
 int LIS(int i = 0, int prev = n){     //Memory -> O(n^2), Time -> O(n^2)
   if(i == n)  return mem[i][prev] = 0;
   int &ret = mem[i][prev];
@@ -25,6 +27,8 @@ void buildLIS(int i = 0, int prev = n){
     buildLIS(i+1, i);
   }
 }
+
+/********************* Dynamic Programming Solution *********************/
 
 int dp[N+9][N+9];
 int iterativeLIS(){    //Memory -> O(n^2), Time -> O(n^2)
@@ -49,7 +53,9 @@ int rollingLIS(){    //Memory -> O(n), Time -> O(n^2)
   return rdp[r][n];
 }
 
-int greadyLIS(){    //Memory -> O(n), Time -> O(nLogn)
+/********************* BinarySearch Solution *********************/
+
+int binarySearchLIS(){    //Memory -> O(n), Time -> O(nLogn)
   vector<int> ret;
   for(int i=0; i<n; i++){
     auto it = lower_bound(ret.begin(), ret.end(), A[i]);
@@ -59,7 +65,7 @@ int greadyLIS(){    //Memory -> O(n), Time -> O(nLogn)
   return (int)ret.size();
 }
 
-void greadyLISWithBuilding(){    //Memory -> O(n), Time -> O(nLogn)
+void binarySearchLISWithBuilding(){    //Memory -> O(n), Time -> O(nLogn)
   int LIS = 0, ret[N+9] , last = -1;
   set<int> retset[N+9];
   for(int i=0; i<n; i++){
@@ -69,7 +75,7 @@ void greadyLISWithBuilding(){    //Memory -> O(n), Time -> O(nLogn)
     retset[LIS].insert(A[i]);
   }
   /*Printing*/
-  printf("Gready says LIS = %d\n", LIS);
+  printf("Binary Search says LIS = %d\n", LIS);
   printf("And a valid sub-sequence is : ");
   for(int i = 1 ; i<=LIS ; ++i){
     auto it = retset[i].upper_bound(last);
@@ -77,6 +83,52 @@ void greadyLISWithBuilding(){    //Memory -> O(n), Time -> O(nLogn)
   }
   puts("");
 }
+
+/********************* Segment Tree Solution *********************/
+
+#define lft(x) (x<<1)
+#define rit(x) (x<<1|1)
+#define med(l, r) ((l+r)>>1)
+
+int st[N<<2];
+
+void update(int p, int l, int r, int idx, int val){
+	if(l>r || l>idx || r<idx)	return;		//invalid segment
+	if(l==r)	st[p] = val;
+	else{
+		update(lft(p), l					, med(l, r), idx, val);
+		update(rit(p), med(l, r)+1, r				 , idx, val);
+		st[p] = max(st[lft(p)], st[rit(p)]);
+	}
+}
+
+int getMax(int p, int l, int r, int i, int j){
+	if(l>r || l>j || r<i)	return 0;
+	if(l>=i && r<=j)	return st[p];
+	int q1 = getMax(lft(p), 		l			 , med(l, r), i, j);
+	int q2 = getMax(rit(p), med(l, r)+1, 			r		, i, j);
+	return max(q1, q2);
+}
+
+bool cmp(pair<int, int> &a, pair<int, int> & b){
+	//ascending values then descending indices to get LIS
+	if(a.first == b.first)	return a.second>b.second;
+	return a.first < b.first;
+}
+
+void segmentTreeLIS(){		//Memory -> O(n), Time -> O(nLogn)
+	pair<int, int> arr[n+5];		//pair of value and index
+	for(int i = 0 ; i < n ; ++i)
+		arr[i] = {A[i], i};
+	sort(arr, arr+n, cmp);
+	for(int i = 0 ; i < n ; ++i){
+		int beforeMe = getMax(1, 0, n-1, 0, arr[i].second);
+		update(1, 0, n-1, arr[i].second, beforeMe+1);
+	}
+	printf("Segment Tree says that LIS = %d\n", st[1]);
+}
+
+/********************* main function *********************/
 
 int main(){
 	// freopen("i.in", "r", stdin);
@@ -91,7 +143,8 @@ int main(){
   puts("");
   printf("DP says LIS = %d\n", iterativeLIS());
   printf("With Rolling the answer is %d\n", LIS());
-  greadyLISWithBuilding();
+  binarySearchLISWithBuilding();
+  segmentTreeLIS();
   return 0;
 }
 

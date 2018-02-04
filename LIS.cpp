@@ -96,8 +96,8 @@ void update(int p, int l, int r, int idx, int val){
 	if(l>r || l>idx || r<idx)	return;		//invalid segment
 	if(l==r)	st[p] = val;
 	else{
-		update(lft(p), l					, med(l, r), idx, val);
-		update(rit(p), med(l, r)+1, r				 , idx, val);
+		update(lft(p), l, med(l, r), idx, val);
+		update(rit(p), med(l, r)+1, r, idx, val);
 		st[p] = max(st[lft(p)], st[rit(p)]);
 	}
 }
@@ -105,8 +105,8 @@ void update(int p, int l, int r, int idx, int val){
 int getMax(int p, int l, int r, int i, int j){
 	if(l>r || l>j || r<i)	return 0;
 	if(l>=i && r<=j)	return st[p];
-	int q1 = getMax(lft(p), 		l			 , med(l, r), i, j);
-	int q2 = getMax(rit(p), med(l, r)+1, 			r		, i, j);
+	int q1 = getMax(lft(p), l, med(l, r), i, j);
+	int q2 = getMax(rit(p), med(l, r)+1, r, i, j);
 	return max(q1, q2);
 }
 

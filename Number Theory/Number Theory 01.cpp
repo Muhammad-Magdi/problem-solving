@@ -80,7 +80,7 @@ Problem #4 -> Given Q numbers for each of them find if it's prime or not?
   void primalityCheck1(){               //O(Q*sqrt(n))
     for(int i = 0 ; i < Q ; ++i){      //The given numbers
       bool isPrime = 1;
-      for(int j = 2 ; j * j <= A[i] ; ++j){
+      for(long long j = 2 ; j * j <= A[i] ; ++j){
         if(A[i]%j == 0) isPrime = 0;
       }
       if(isPrime)   printf("%d is a Prime Number\n", A[i]);
@@ -93,7 +93,7 @@ Problem #4 -> Given Q numbers for each of them find if it's prime or not?
   bitset<N> isComposite;
   void sieve(){                             //O(N*Log(Log(N)))
     isComposite[0] = isComposite[1] = 1;
-    for(int i = 2 ; i <= N ; ++i){      //The Maximum value
+    for(long long i = 2 ; i*i <= N ; ++i){      //The Maximum value
       if(!isComposite[i]) for(int j = i*i ; j <= N ; j+=i){
         isComposite[j] = 1;
       }
@@ -105,9 +105,9 @@ Goldbech`s conjecture:
 
 /********************************** Factors ************************************/
 
-  vector<pair<int, int> > factors;      // <prime, power>
+  vector<pair<int, int> > factors;      // <prime, power> that represents P^e
   void factorize1(){
-    for(int i = 2 ; i*i <= n ; ++i){
+    for(long long i = 2 ; i*i <= n ; ++i){
       int power = 0;
       while(n%i==0){
         n/=i;
@@ -141,6 +141,7 @@ Modular Arithmetic:
   (a * b) % m = ((a % m) * (b % m)) % m
   (a - b) % m = ((a % m) – (b % m)) % m
   (a + m) % m = a%m
+  (a ^ b) % m = (a ^ ( b % (m-1))) % m
 
   int add(int a, int b, int m){
       return (a%m + b%m) % m;

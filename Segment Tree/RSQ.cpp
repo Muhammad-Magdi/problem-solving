@@ -45,23 +45,23 @@ int sum(int p, int l, int r, int i, int j){				//O(log(n))
 }
 
 int main(){
-  // freopen("i.in", "rt", stdin);
-  // freopen("o.out", "wt", stdout);
-  cin.sync_with_stdio(0);
+	// freopen("i.in", "rt", stdin);
+	// freopen("o.out", "wt", stdout);
+	cin.sync_with_stdio(0);
 	cin >> n;
 	for(int i = 0 ; i < n ; ++i)
 		cin >> A[i];
 	cin >> q;
 	build(1, 0, n-1);
 	while(q--){
-			cin >> t >> a >> b;
-			if(t){
-				printf("The sum from %d to %d is %d\n", a, b, sum(1, 0, n-1, a, b));
-			}else{
-				update(1, 0, n-1, a, b);
-			}
+		cin >> t >> a >> b;
+		if(t){
+			printf("The sum from %d to %d is %d\n", a, b, sum(1, 0, n-1, a, b));
+		}else{
+			update(1, 0, n-1, a, b);
+		}
 	}
-  return 0;
+	return 0;
 }
 
 /*

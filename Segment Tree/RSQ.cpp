@@ -5,7 +5,7 @@ const int N = 1e5+5 , M = (N<<2), OO = 1000000007;
 const double EPS = 0.00001;
 
 #define lft(x) (x<<1)
-#define rit(x) (x<<1|1)
+#define rit(x) ((x<<1)|1)
 #define med(l, r) ((l+r)>>1)
 
 int n, q, t, a, b;

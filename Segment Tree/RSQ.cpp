@@ -1,6 +1,4 @@
-#include <iostream>
-#include <cstring>
-#include <bitset>
+#include <bits/stdc++.h>
 
 using namespace std;
 const int N = 1e5+5 , M = (N<<2), OO = 1000000007;

@@ -9,7 +9,7 @@ const int N = 1000, M = 2e6, OO = 1000000007, EPS = 0.00000001;
 
 int n , A[N+9], mem[N+9][N+9];
 
-/********************* Memoization Solution *********************/
+/********************* Recursive DP Solution *********************/
 
 int LIS(int i = 0, int prev = n){     //Memory -> O(n^2), Time -> O(n^2)
   if(i == n)  return mem[i][prev] = 0;
@@ -28,7 +28,7 @@ void buildLIS(int i = 0, int prev = n){
   }
 }
 
-/********************* Dynamic Programming Solution *********************/
+/********************* Iterative DP Solution *********************/
 
 int dp[N+9][N+9];
 int iterativeLIS(){    //Memory -> O(n^2), Time -> O(n^2)
@@ -137,11 +137,11 @@ int main(){
   scanf("%d", &n);
   for(int i = 0 ; i < n ; ++i)
     scanf("%d", A+i);
-  printf("Memoization says LIS = %d\n", LIS());
+  printf("Recursive Solution says LIS = %d\n", LIS());
   printf("And a valid sub-sequence is : ");
   buildLIS();
   puts("");
-  printf("DP says LIS = %d\n", iterativeLIS());
+  printf("Iterative Solution says LIS = %d\n", iterativeLIS());
   printf("With Rolling the answer is %d\n", LIS());
   binarySearchLISWithBuilding();
   segmentTreeLIS();

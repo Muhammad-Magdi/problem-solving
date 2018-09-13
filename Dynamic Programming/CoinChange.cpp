@@ -7,14 +7,14 @@ int Coins[] = {5, 10, 25, 50, 100};
 long long mem[N][10];
 int n;
 
-/*
-long long solve(int i = 0, int rem = n){			//O(n*5)
-	if(i==5)	return rem==0;
+
+long long solve(int i = 0, int rem = n){			//O(n*n)
+	if(i==5)	return rem == 0;
 	return solve(i+1, rem) + (rem>=Coins[i]? solve(i, rem-Coins[i]) : 0);
 }
-*/
 
-long long coinChange(int rem = n, int startCoin = 0){						//O(n*5)
+/*
+long long coinChange(int rem = n, int startCoin = 0){						//O(n*n)
 	if(!rem)	return 1;
 	long long & ret = mem[rem][startCoin];
 	if(~ret)	return ret;
@@ -23,6 +23,7 @@ long long coinChange(int rem = n, int startCoin = 0){						//O(n*5)
 		ret += (rem>=Coins[coin]? coinChange(rem-Coins[coin], coin) : 0);
 	return ret;
 }
+*/
 
 int main(){
   // freopen("i.in", "rt", stdin);

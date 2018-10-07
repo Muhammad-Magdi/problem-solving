@@ -1,57 +1,44 @@
-#include <bits/stdc++.h>
+#include <cstdio>
+#include <cstring>
+#include <string>
 
 using namespace std;
-const int N = 1e2 +5 , M = 1e4 +5, OO = 1000000007;
+const int N = 10 , M = 1e4 +5, OO = 0x3f3f3f3f;
 
-int grid[N][N], n, m;
+int n, m;
+char grid[N][N];
 
-bool valid(int r, int c){
-  return (r<n && r>=0 && c<m && c>=0 && grid[r][c]!=0);
+bool valid(int r, int c){   //inside the grid and not equal #
+  return (r<n && r>=0 && c<m && c>=0 && grid[r][c]!='#');
 }
-vector<pair<int, int> > path;
+
+string path;
 
 void printPath(){
-  for(pair<int, int> q : path)
-    printf("%d %d\n", q.first, q.second);
+  printf("%s\n", path.c_str());
 }
 
 bool solveRIM(int r = 0, int c = 0){
-  if(r==n-1 && c==m-1)  return 1;
-  if(valid(r, c+1)){
-    path.push_back({r, c+1});
-    if(solveRIM(r, c+1))  return 1;
-    path.pop_back();
+  if(r == n-1 && c == m-1){
+    printPath();
+  }else{
+    if(valid(r+1, c)){     //Down
+      path.push_back('D');        //do
+      solveRIM(r+1, c);           //recurse
+      path.pop_back();            //undo
+    }
+    if(valid(r, c+1)){    //Right
+      path.push_back('R');        //do
+      solveRIM(r, c+1);           //recurse
+      path.pop_back();            //undo
+    }
   }
-  if(valid(r+1, c)){
-    path.push_back({r+1, c});
-    if(solveRIM(r+1, c))  return 1;
-    path.pop_back();
-  }
-  return 0;
 }
 
 int main(){
-  // freopen("i.in", "rt", stdin);
-  // freopen("o.out", "wt", stdout);
   scanf("%d %d", &n, &m);
   for(int i = 0 ; i < n ; ++i)
-    for(int j = 0 ; j < m ; ++j)
-      scanf("%d", &grid[i][j]);
-  if(solveRIM()){
-    printPath();
-  }else{
-    printf("No Solution");
-  }
+      scanf("%s", grid[i]);
+  solveRIM();
   return 0;
 }
-
-
-
-
-
-
-
-
-
-/*
-*/

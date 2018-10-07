@@ -1,49 +1,32 @@
-#include <bits/stdc++.h>
+#include <cstdio>
+#include <vector>
 
 using namespace std;
-const int N = 1e2 +5 , M = 1e4 +5, OO = 1000000007;
+const int N = 25 , M = 1e4 +5, OO = 0x3f3f3f3f;
 
-int n, A[N], k;
-vector<int> solution;
+int n, A[N], x;
+vector<int> path;
 
-void printSubset(){
-  for(int q : solution)
-    printf("%d ", q);
-  puts("");
+void printPath(){
+  for(int i = 0 ; i < int(path.size()) ; ++i)
+    printf("%d%c", path[i], " \n"[i==int(path.size())-1]);
 }
 
-bool solveSS(int i = 0, int sum = 0){
-  if(sum == k)  return 1;
-  if(i==n)  return 0;
-  if(sum+A[i]<=k){
-    solution.push_back(A[i]);
-    if(solveSS(i+1, sum+A[i]))  return 1;
-    solution.pop_back();
+void solveSS(int i = 0, int sum = 0){
+  if(i == n || sum == x){
+    if(sum == x)  printPath();
+  }else{
+    solveSS(i+1, sum);      //Leave it
+
+    path.push_back(A[i]);   //do
+    solveSS(i+1, sum+A[i]); //recurse   -take it-
+    path.pop_back();        //undo
   }
-  if(solveSS(i+1, sum))  return 1;
-  return 0;
 }
 
 int main(){
-  // freopen("i.in", "rt", stdin);
-  // freopen("o.out", "wt", stdout);
-  scanf("%d %d", &n, &k);
-  for(int i = 0 ; i < n ; ++i)
-    scanf("%d", A+i);
-  if(solveSS())
-    printSubset();
-  else
-    printf("No Solution\n");
+  scanf("%d %d", &n, &x);
+  for(int i = 0 ; i < n ; ++i)    scanf("%d", A+i);
+  solveSS();
   return 0;
 }
-
-
-
-
-
-
-
-
-
-/*
-*/

@@ -1,7 +1,7 @@
 #include <cstdio>
 
 using namespace std;
-const int N = 15 , M = 1e4 +5, OO = 1000000007;
+const int N = 15 , M = 1e4 +5, OO = 0x3f3f3f3f;
 
 int n;
 bool col[N], md[2*N], sd[2*N];

@@ -12,6 +12,7 @@
     2- Read/Write speed to memory.
     3- 32 bit VS 64 bit.
     4- INPUT.
+    5- ...
 
 * What are the cases your code may face?
     1- Best case.
@@ -21,7 +22,7 @@
 * The notations to represent your code's Complexity:
     1- Big O Notation     ---->     the upper bound of the time.
     2- Omega Notation     ---->     the lower bound of the time.
-    3- Theta Notation     ---->     the bound itself.    (Calculated mathematically)
+    3- Theta Notation     ---->     the bound itself.
 
 * Rules:
     1- Running time is the sum of running times of all consecutive blocks.
@@ -75,6 +76,24 @@ long long calcSumSegment(int a, int b){		//O(b)
   return sum;
 }
 
+int stepper(int n, int s){      //O(n/s)
+  int ret = 0;
+  for(int i = 1 ; i <= n ; i += s){
+    ret += i;
+  }
+  return ret;
+}
+
+void merge(int* A, int szA, int* B, int szB){   //O(sz)
+  int idxA = 0, idxB = 0, idxC = 0;
+  while(idxA < szA && idxB < szB){
+    if(A[idxA] < B[idxB]) C[idxC++] = A[idxA++];
+    else C[idxC++] = B[idxB++];
+  }
+  while(idxA < szA) C[idxC++] = A[idxA++];
+  while(idxB < szB) C[idxC++] = B[idxB++];
+}
+
 int fact(int n){		//O(n)
   if(!n || n==1)	return 1;
   return n*fact(n-1);
@@ -86,10 +105,18 @@ int power1(int base, int power){		//O(power)
 }
 
 
+int calcLog(int n){		//O(log(n))
+  int ret = 0;
+    while(n > 1){
+    ++ret;
+    n /= 2;
+  }
+  return ret;
+}
 
 bool binarySearch(int val, int n){			//O(log(n))
   int lo = 0, hi = n, mid;
-  while(lo<hi){
+  while(hi-lo > 0){
     mid = ((lo+hi)>>1);
     if(A[mid] == val) return 1;
     if(A[mid] < val)
@@ -100,13 +127,9 @@ bool binarySearch(int val, int n){			//O(log(n))
   return 0;
 }
 
-int calcLog(int n){		//O(log(n))
-	int ret = 0;
-	while(n > 1){
-		++ret;
-		n /= 2;
-	}
-  return ret;
+void printPowersOfTwoTill(int n){   //O(log(n))
+  for(int p = 1 ; p <= n ; p *= 2)
+    printf("%d\n", p);
 }
 
 int power2(int base, int power){		//O(log(n))
@@ -155,21 +178,24 @@ void searchArray(){		//O(n*log(n))
   }
 }
 
-bool isComp[1008];
-void something(){		//O(n*log(n))
-  for(int i = 0 ; i < n ; ++i){
-    if(!isComp[i]){
-      for(int j = i ; j < n ; j+=i)
-        isComp[i] = 1;
-    }
-  }
+void something(int n){		//O(n*log(n))
+  for(int i = 1 ; i <= n ; ++i)
+    for(int j = i ; j <= n ; j+=i)
+      //Something
 }
 
+void mergeSort(int st = 0, int en = n-1){   //O(n*log(n))
+  if(st == en)  return;
+  int mid = (st+en)>>1;
+  mergeSort(st, mid);
+  mergeSort(mid+1, en);
+  merge(A, mid-st+1, A+mid+1, en-mid);
+}
 
 
 void printPermutations(string s){		//O(n!)
   sort(s.begin(), s.end());	
 	do {
 		cout << s << endl;
-	} while(next_permutation(s.begin(), s.end()));
+	}while(next_permutation(s.begin(), s.end()));
 }

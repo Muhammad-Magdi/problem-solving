@@ -5,7 +5,8 @@
 #include <bits/stdc++.h>
 
 using namespace std;
-const int N = 1000, M = 2e6, OO = 1000000007, EPS = 0.00000001;
+const int N = 1000, M = 2e6, OO = 1000000007;
+const double EPS = 0.00000001;
 
 int n , A[N+9], mem[N+9][N+9];
 
